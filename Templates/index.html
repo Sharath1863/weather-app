@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .weather-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        .weather-box h2 {
+            color: #007BFF;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .weather-details {
+            margin-top: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .weather-details p {
+            margin: 10px 0;
+        }
+
+        .weather-details .temp {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Information</h1>
+
+    <div class="weather-box">
+        <form method="POST">
+            <input type="text" name="location" placeholder="Enter location" required>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        {% if weather %}
+            <h2>Weather in {{ weather.location }}</h2>
+            <div class="weather-details">
+                <p class="temp">Temperature: {{ weather.temperature }}°C</p>
+                <p>Humidity: {{ weather.humidity }}%</p>
+                <p>Pressure: {{ weather.pressure }} hPa</p>
+                <p>Wind Speed: {{ weather.wind_speed }} m/s</p>
+                <p>Wind Direction: {{ weather.wind_deg }}°</p>
+                <p><strong>Description:</strong> {{ weather.description }}</p>
+                <p><strong>Content:</strong> {{ weather.content }}</p>
+            </div>
+        {% else %}
+            <p class="error-message">Location not found. Please try again.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
